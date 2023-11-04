@@ -24,20 +24,23 @@ public class PortDemurrageCalculator
             : arrived != DateTime.MinValue ? arrived 
             : DateTime.MinValue;
 
-        DateTime demurrageStartDate = availableDate != DateTime.MinValue ? availableDate.AddDays(fullLoadPortFreeTime) : DateTime.MinValue;
+        DateTime demurrageStartDate = availableDate != DateTime.MinValue ? availableDate.AddDays(fullLoadPortFreeTime) 
+            : DateTime.MinValue;
 
         DateTime gateOutDate = fclWharfGateOut != DateTime.MinValue ? fclWharfGateOut 
             : actualFullDelivery != DateTime.MinValue ? actualFullDelivery 
             : DateTime.Now;
 
         TimeSpan demurrageTimeSpan = gateOutDate - demurrageStartDate;
+        
+        int daysOnDemurrage = Math.Max(0, demurrageTimeSpan.Days);
 
         return new DemurrageResult
         {
             AvailableDate = availableDate,
             DemurrageStartDate = demurrageStartDate,
             GateOutDate = gateOutDate,
-            DaysOnDemurrage = demurrageTimeSpan.Days
+            DaysOnDemurrage = daysOnDemurrage
         };
     }
 }
