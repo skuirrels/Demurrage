@@ -15,13 +15,13 @@ public class PortDemurrageCalculator
 
     public static DemurrageResult CalculateDemurrageDetails(
         DateTime fclUnloaded,
-        DateTime arrived,
+        DateTime actualTimeOfArrival,
         DateTime fclWharfGateOut,
         DateTime actualFullDelivery,
         int fullLoadPortFreeTime) 
     {
         DateTime availableDate = fclUnloaded != DateTime.MinValue ? fclUnloaded 
-            : arrived != DateTime.MinValue ? arrived 
+            : actualTimeOfArrival != DateTime.MinValue ? actualTimeOfArrival 
             : DateTime.MinValue;
 
         DateTime demurrageStartDate = availableDate != DateTime.MinValue ? availableDate.AddDays(fullLoadPortFreeTime) 
